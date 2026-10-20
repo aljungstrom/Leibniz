@@ -2,15 +2,16 @@
 
 {-
 
-This file contains a defintion of 'wild preorders' and J/univalence
+This file contains a definition of 'wild preorders' and J/univalence
 for these. These are simply wild categories without equations.
 
-Since the defintiion of a functor of wild cats does not mention any
+Since the definition of a functor of wild cats does not mention any
 other structure than that mentioned of a wild preorders these are
-often a more suitable framework. In particular, if a wild functor F :
-C → D is an euqivalence of of wild (univalent) categories (in the
-naive sense), this won't imply that C = D. However, we do get that ⌈ C
-⌉ = ⌈ D ⌉ where ⌈_⌉ is the forgetful functor WildCat → WildPreorder .
+often a more suitable framework. In particular, if a wild functor
+F : C → D is an equivalence of wild (univalent) categories (in the
+naive sense), this won't imply that C = D. However, we do get that
+⌈ C ⌉ = ⌈ D ⌉ where ⌈_⌉ is the forgetful functor
+WildCat → WildPreorder.
 
 -}
 module Categories.WildPreorder where
@@ -47,7 +48,7 @@ private
 
 -- To make the coming proofs more convenient, we define wild preorders
 -- using Σ types instead of records. In the future, the Cubical
--- library should define a wild cat as wild peorder + equations.
+-- library should define a wild cat as wild preorder + equations.
 WildPreorder : (ℓ ℓ' : Level) → Type (ℓ-suc (ℓ-max ℓ ℓ'))
 WildPreorder ℓ ℓ' =
   Σ[ ob ∈ Type ℓ ] Σ[ hom ∈ (ob → ob → Type ℓ') ]

@@ -52,7 +52,7 @@ module _ (AB XY CD : Fam ℓ₁) where
           ∣push (b , y) ↦ λ _ → refl)})
 
 -- specialised predicate spelling out what it means for ⊠ and ⋔ to be
--- adjoint. This predicate will be transproted over to Map later
+-- adjoint. This predicate will be transported over to Map later
 
 record wildBiAdjoint (C : WildPreorder ℓ₁ ℓ₂)
        (_⊗_ _⋔_ : fst C → fst C → fst C)

@@ -76,7 +76,7 @@ _⊠ᵐ_ : Map ℓ₁ → Map ℓ₂ → Map _
 ((A , B , f) ⊠ᵐ (X , Y , g)) .snd .snd = f ⊠ g
 
 -- Goal now: show functoriality and adjointness. Since we know that
--- these properties are satisfied by the analoguous constructions on
+-- these properties are satisfied by the analogous constructions on
 -- Fam, we can transport these results over back to Map. To this end,
 -- we need to show that the Leibniz construction is preserved by the
 -- equivalence Fam ≃ Map.
@@ -220,7 +220,7 @@ assoc⊠ᵐ {ℓ₁ = ℓ₁} {ℓ₂ = ℓ₂} {ℓ₃ = ℓ₃} f g h =
                         {B = f* ⊠ᶠ (g* ⊠ᶠ h*)})
                  (assoc⊠ᶠ f* g* h*)))
 
--- Commuatativity
+-- Commutativity
 comm⊠ᵐS→ : {f : A → B} {g : X → Y}
   → S[ f ⊠ g ] → S[ g ⊠ f ]
 comm⊠ᵐS→ =

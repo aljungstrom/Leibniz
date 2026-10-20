@@ -79,7 +79,6 @@ isContrTot≃Fam : (A : Fam ℓ₁) → isContr (Σ[ B ∈ Fam ℓ₁ ] (A ≃Fa
 isContrTot≃Fam A .fst = A , IdFamEquiv A
 isContrTot≃Fam A .snd = lem _
   where
-  aa = Σ-Π-Iso
   lem : isProp ((Σ[ B ∈ Fam _ ] (A ≃Fam B)))
   lem = isOfHLevelRetractFromIso 1
          (compIso Σ-assoc-Iso
