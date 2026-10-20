@@ -15,7 +15,7 @@ open import Cubical.Foundations.Univalence
 open import Cubical.Foundations.Transport
 
 open import Cubical.Foundations.Equiv
- 
+
 open import Cubical.Data.Sigma
 open import Cubical.Data.Sum as ⊎
 open import Cubical.Data.Unit
@@ -305,7 +305,7 @@ swapArgsEquiv =
                   (λ _ → refl) (λ _ → refl))
 
 domEquivDep : ∀ {ℓ ℓ'} {A A' : Type ℓ}{B : A → Type ℓ'}
-  → (e : A' ≃ A) 
+  → (e : A' ≃ A)
   → ((a : A) → B a) ≃ ((a' : A') → B (fst e a'))
 domEquivDep {A = A} {B = B} =
   EquivJ (λ A' e → ((a : A) → B a) ≃ ((a' : A') → B (fst e a'))) (idEquiv _)
@@ -314,15 +314,15 @@ terminal* : ∀ {ℓ} (X : Type ℓ) → X → Unit* {ℓ = ℓ}
 terminal* X x = tt*
 
 ∸-<ᵗ : (n k : ℕ) → (n ∸ k) <ᵗ suc n
-∸-<ᵗ n zero = <ᵗsucm {n}
+∸-<ᵗ n zero = <ᵗsuc {n}
 ∸-<ᵗ zero (suc k) = tt
 ∸-<ᵗ (suc n) (suc k) =
-  <ᵗ-trans {n ∸ k} {suc n} {suc (suc n)} (∸-<ᵗ n k) (<ᵗsucm {suc n})
+  <ᵗ-trans {n ∸ k} {suc n} {suc (suc n)} (∸-<ᵗ n k) (<ᵗsuc {suc n})
 
 ∸-<ᵗ-suc : (n k : ℕ) → (n ∸ k) <ᵗ suc (suc n)
 ∸-<ᵗ-suc n k = ∸-<ᵗ (suc n) (suc k)
 
--- slightly alternative definition of the function type over joins  
+-- slightly alternative definition of the function type over joins
 JoinFun≃ConstL : (join A B → C) ≃ (Σ[ f ∈ (A → C) ] (B → Const f))
 JoinFun≃ConstL {A = A} {B = B} {C = C} =
   compEquiv (isoToEquiv characJoinRec)

@@ -233,9 +233,9 @@ module STT (I : Interval ℓ-zero) where -- we assume the existence of an interv
     𝕜 : Fin (suc n)
     𝕜 = (k , <ᵗ-trans-suc {k} q)
     p' : ¬ fzero ≡ 𝕜
-    p' h = Empty.rec (¬m<ᵗm {k} (subst (_<ᵗ k) (cong fst h) p))
+    p' h = Empty.rec (<ᵗ-irrefl {k} (subst (_<ᵗ k) (cong fst h) p))
     q' : ¬ flast ≡ 𝕜
-    q' h = Empty.rec (¬m<ᵗm {k} (subst (k <ᵗ_) (cong fst h) q))
+    q' h = Empty.rec (<ᵗ-irrefl {k} (subst (k <ᵗ_) (cong fst h) q))
 
   Remark-4-11 : (n k : ℕ) (p : 0 <ᵗ k) (q : k <ᵗ n)
               → isInnerAnodyneFib ⦅ ƛ n (k , <ᵗ-trans-suc {k} q) ⦆
@@ -244,6 +244,6 @@ module STT (I : Interval ℓ-zero) where -- we assume the existence of an interv
     𝕜 : Fin (suc n)
     𝕜 = (k , <ᵗ-trans-suc {k} q)
     p' : ¬ fzero ≡ 𝕜
-    p' h = Empty.rec (¬m<ᵗm {k} (subst (_<ᵗ k) (cong fst h) p))
+    p' h = Empty.rec (<ᵗ-irrefl {k} (subst (_<ᵗ k) (cong fst h) p))
     q' : ¬ flast ≡ 𝕜
-    q' h = Empty.rec (¬m<ᵗm {k} (subst (k <ᵗ_) (cong fst h) q))
+    q' h = Empty.rec (<ᵗ-irrefl {k} (subst (k <ᵗ_) (cong fst h) q))

@@ -147,7 +147,7 @@ module HornLifting (I' : Interval ℓ) where
       IsPoset.is-trans (PosetStr.isPoset (snd (MeetSemilattice.IndPoset meetLattice)))
         (x (suc a , a<)) _ (x b)
         (cong₂ _∧l_ refl (cong x PathFin) ∙ r (a , a<))
-        (indhyp (<ᵗ-trans a< <ᵗsucm) s)
+        (indhyp (<ᵗ-trans a< <ᵗsuc) s)
     indStep a (eq s) indhyp a< ineq =
       cong₂ _∧l_ refl (cong x (Σ≡Prop (λ _ → isProp<ᵗ) s)) ∙ r (a , a<)
     indStep a (gt s) indhyp a< ineq = Empty.rec (falseDichotomies.gt-lt (s , ineq))
@@ -253,8 +253,8 @@ module HornLifting (I' : Interval ℓ) where
     -- underlying map sends 1 to 0
     Δ×Δ₂→Δ-1↦0 : (x : _) (y : _) → Δ×Δ₂→Δ-map (x , y) flast ≡ 0l
     Δ×Δ₂→Δ-1↦0 (x , (_ , p , _)) (y , (_ , q , _)) with (suc n ≟ᵗ fst k)
-    ... | lt x₁ = Empty.rec (¬m<ᵗm {m = suc n} (<ᵗ-trans x₁ (snd k)))
-    ... | eq x₁ = Empty.rec (¬m<ᵗm {m = suc n} (subst (_<ᵗ suc n) (sym x₁) (snd k)))
+    ... | lt x₁ = Empty.rec (<ᵗ-irrefl {m = suc n} (<ᵗ-trans x₁ (snd k)))
+    ... | eq x₁ = Empty.rec (<ᵗ-irrefl {m = suc n} (subst (_<ᵗ suc n) (sym x₁) (snd k)))
     ... | gt x₁ = cong₂ _∧l_ (cong x (Σ≡Prop (λ _ → isProp<ᵗ) refl) ∙ p) refl
                 ∙ 0l-∧l _
 
@@ -287,7 +287,7 @@ module HornLifting (I' : Interval ℓ) where
      ∙ sym (∧lRdist∨l _ _ _)
      ∙ cong₂ _∧l_ (idem∨ _) refl
     ... | gt x₁ | lt x₂ = Empty.rec (falseDichotomies.gt-lt
-                                      (x₂ , <ᵗ-trans x₁ (<ᵗ-trans <ᵗsucm <ᵗsucm)))
+                                      (x₂ , <ᵗ-trans x₁ (<ᵗ-trans <ᵗsuc <ᵗsuc)))
     ... | gt x₁ | eq x₂ = Empty.rec (falseDichotomies.lt-eq (x₁ , sym x₂))
     ... | gt x₁ | gt x₂ =
         ∧lAssoc _ _ _
@@ -304,7 +304,7 @@ module HornLifting (I' : Interval ℓ) where
     Δ×Δ₂→Δ (x , y) .snd .snd .fst = Δ×Δ₂→Δ-1↦0 x y
     Δ×Δ₂→Δ (x , y) .snd .snd .snd = Δ×Δ₂→Δ-decr x y
 
-  -- Step 2: map between domains domains Δ×Δ₂→Δ : dom ((ƛ n k) ⊠ᵐ (ƛ 2 1)) → dom (ƛ n k)
+  -- Step 2: map between domains Δ×Δ₂→Δ : dom ((ƛ n k) ⊠ᵐ (ƛ 2 1)) → dom (ƛ n k)
     -- need some technical lemmas about when Δ×Δ₂→Δ is constant
   private
     Δ×Δ₂→Δ-constant₁ : (n : ℕ) (k : Fin (suc n))
@@ -324,7 +324,7 @@ module HornLifting (I' : Interval ℓ) where
     ... | eq x₁ | eq x₂ = Empty.rec (falseDichotomies.eq-eq (x₂ , cong suc x₁))
     ... | eq x₁ | gt x₂ = Empty.rec (w (toℕ-injective x₁))
     ... | gt x₁ | lt x₂ = Empty.rec (falseDichotomies.gt-lt
-                                      (x₂ , <ᵗ-trans x₁ (<ᵗ-trans <ᵗsucm <ᵗsucm)))
+                                      (x₂ , <ᵗ-trans x₁ (<ᵗ-trans <ᵗsuc <ᵗsuc)))
     ... | gt x₁ | eq x₂ = Empty.rec (falseDichotomies.lt-eq (x₁ , sym x₂))
     ... | gt x₁ | gt x₂ = cong (_∧l y (2 , tt)) s
 
