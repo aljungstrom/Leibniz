@@ -2,7 +2,7 @@
 module README where
 
 -- This formalisation depends on the Cubical library, version of
--- 12 June 2026, commit 7b9019 and type checks with Agda 2.8.0.
+-- 20 October 2026, commit c37782b and type checks with Agda 2.8.0.
 
 -- The formalisation is structured as follows:
 
