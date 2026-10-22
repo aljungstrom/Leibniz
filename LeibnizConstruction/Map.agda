@@ -25,7 +25,7 @@ open import Cubical.Foundations.Equiv
 open import Cubical.Functions.FunExtEquiv
 
 open import Cubical.HITs.Pushout
-open import Cubical.HITs.Pushout.PushoutProduct
+open import Cubical.HITs.Pushout.PushoutProduct renaming (PushProd to PushProd' ; _×̂_ to pprod)
 
 open import Cubical.Data.Sigma
 open import Cubical.Data.Unit
@@ -61,7 +61,7 @@ _⋔ᵐ_ : Map ℓ₁ → Map ℓ₂ → Map _
 ((A , B , f) ⋔ᵐ (X , Y , g)) .snd .snd = f ⋔ g
 
 ------- Leibniz product -----------
--- Source of the Leibniz product (imported and renamed)
+-- Source of the Leibniz product
 S[_⊠_] : (f : A → B) (g : X → Y) → Type _
 S[_⊠_] {A = A} {B = B} {X = X} {Y = Y} = PushProd
 

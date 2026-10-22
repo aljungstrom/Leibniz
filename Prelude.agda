@@ -26,7 +26,9 @@ open import Cubical.Data.Nat.Order.Inductive
 
 open import Cubical.HITs.Pushout
 open import Cubical.HITs.Join
-  renaming (join to join') renaming (joinPushout to join)
+  renaming (join to join' ; joinPushout to join)
+open import Cubical.HITs.Pushout.PushoutProduct
+  renaming (PushProd to PushProd' ; _×̂_ to pprod)
 
 open Iso
 
@@ -337,3 +339,16 @@ JoinFun≃ConstL {A = A} {B = B} {C = C} =
 JoinFun≃ConstR : (join A B → C) ≃ (Σ[ g ∈ (B → C) ] (A → Const g))
 JoinFun≃ConstR {A = A} {B = B} {C = C} =
   compEquiv (isoToEquiv (domIso joinCommIso)) JoinFun≃ConstL
+
+-- Pushout products are available in the cubical library, but have the
+-- arguments flipped compared to the way they are presented in the
+-- paper, so we redefine them here.
+PushProd : (f : A → B) (g : X → Y) → Type _
+PushProd {A = A} {B = B} {X = X} {Y = Y} f g =
+  Pushout {A = A × X} {B = B × X} {C = A × Y}
+    (map-× f (idfun X)) (map-× (idfun A) g)
+
+_×̂_ : (f : A → B) (g : X → Y) → PushProd f g → B × Y
+(f ×̂ g) (inl (b , x)) = b , g x
+(f ×̂ g) (inr (a , y)) = f a , y
+(f ×̂ g) (push (a , x) i) = f a , g x

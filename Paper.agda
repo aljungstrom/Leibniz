@@ -41,7 +41,6 @@ open import Cubical.Data.Sigma
 open import Cubical.Data.Nat
 open import Cubical.Data.Nat.Order.Inductive hiding (eq)
 
-open import Cubical.HITs.Pushout.PushoutProduct renaming (_×̂_ to _×^_)
 open import Cubical.HITs.Join hiding (join) renaming (joinPushout to join)
 
 open import Cubical.WildCat.Base
@@ -104,7 +103,7 @@ pushout-product : Map → Map → Map
 pushout-product f g = f ⊠ᵐ g
 dagger = pushout-product
 
-NB₁ : (f g : Map) → (f ⊠ᵐ g)⃗ ≡ (f ⃗) ×^ (g ⃗)
+NB₁ : (f g : Map) → (f ⊠ᵐ g)⃗ ≡ (f ⃗) ×̂ (g ⃗)
 NB₁ f g = refl
 
 pullback-hom : Map → Map → Map
@@ -135,7 +134,7 @@ Proposition-3-3 : ⌈ 𝑭𝑨𝑴 ⌉ ≅ᵂᴾ ⌈ 𝑴𝑨𝑷 ⌉
 Proposition-3-3 = 𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷
 
 Proposition-3-4 : {f : A → B} {g : X → Y} (b : B) (y : Y)
-  → fiber (f ×^ g) (b , y) ≃ join (fiber f b) (fiber g y)
+  → fiber (f ×̂ g) (b , y) ≃ join (fiber f b) (fiber g y)
 Proposition-3-4 = Rijke.Fib×^≃JoinFib
 
 Definition-3-5 : Fam → Fam → Fam

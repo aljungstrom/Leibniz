@@ -224,7 +224,7 @@ module HornLifting (I' : Interval ℓ) where
 
     -- the section
     λ→λ⊠ᵐλ₂,₁ : Map[ ⦅ ƛ n k ⦆ , ⦅ ƛ n k ⦆ ⊠ᵐ ⦅ ƛ 2 1 ⦆ ]
-    λ→λ⊠ᵐλ₂,₁ .fst x = inl (x , Λ→Δ₂ x)
+    λ→λ⊠ᵐλ₂,₁ .fst x = inr (x , Λ→Δ₂ x)
     λ→λ⊠ᵐλ₂,₁ .snd .fst x = x , Δ→Δ₂ x
     λ→λ⊠ᵐλ₂,₁ .snd .snd x = refl
 
@@ -387,21 +387,21 @@ module HornLifting (I' : Interval ℓ) where
   Dom[λ⊠ᵐλ₂₁]→Λ : (n : ℕ) (k : Fin (suc n)) → ¬ fzero ≡ k → ¬ flast ≡ k
     → Dom (⦅ ƛ n k ⦆ ⊠ᵐ ⦅ ƛ 2 1 ⦆) → Λ n k
   Dom[λ⊠ᵐλ₂₁]→Λ n k k-notzero k-notlast =
-    rec∣inl (x , y) ↦ (Δ×Δ₂→Δ n k (fst x , y)) ,
-                       PT.map (λ j → fst j , fst (snd j)
-                                 , Δ×Δ₂→Δ-constant₁ n k (fst x) y (fst j)
-                                                    (fst (snd j)) (snd (snd j)))
-                              (snd x)
-       ∣inr (x , y) ↦ (Δ×Δ₂→Δ n k (x , fst y)) ,
-                       PT.map (λ { ((0 , j<) , p , q) →
-                                   fzero , k-notzero
-                                 , Δ×Δ₂→Δ-constant₂ n k k-notzero x (fst y) q
-                                 ; ((suc zero , tt) , p , q) → Empty.rec (p refl)
-                                 ; ((suc (suc zero) , _) , p , q)
-                                   → flast , k-notlast ,
-                                     Δ×Δ₂→Δ-constant₃ n k k-notlast x (fst y) q
-                                 })
-                              (snd y)
+    rec∣inl (x , y) ↦ Δ×Δ₂→Δ n k (x , fst y)
+      , PT.map (λ { ((0 , j<) , p , q) →
+                    fzero , k-notzero
+                  , Δ×Δ₂→Δ-constant₂ n k k-notzero x (fst y) q
+                  ; ((suc zero , tt) , p , q) → Empty.rec (p refl)
+                  ; ((suc (suc zero) , _) , p , q)
+                    → flast , k-notlast ,
+                      Δ×Δ₂→Δ-constant₃ n k k-notlast x (fst y) q
+                  })
+               (snd y)
+       ∣inr (x , y) ↦ (Δ×Δ₂→Δ n k (fst x , y))
+                      , PT.map (λ j → (fst j) , (fst (snd j)
+                              , Δ×Δ₂→Δ-constant₁ n k (fst x) y
+                                 (fst j) (fst (snd j)) (snd (snd j))))
+                        (snd x)
        ∣push (x , y) ↦ Σ≡Prop (λ _ → squash₁) refl
 
   -- Definition of retraction
@@ -443,7 +443,7 @@ module HornLifting (I' : Interval ℓ) where
     retractT x = Σ≡Prop isProp-hasΔStr (funExt (retractProof x))
 
     retractS : (x : Λ n k)
-             → Dom[λ⊠ᵐλ₂₁]→Λ n k p q (inl (x , Λ→Δ₂ n k x)) ≡ x
+             → Dom[λ⊠ᵐλ₂₁]→Λ n k p q (inr (x , Λ→Δ₂ n k x)) ≡ x
     retractS x = Σ≡Prop (λ _ → squash₁) (retractT (fst x))
 
   isInnerAnodyneHornInclusion
