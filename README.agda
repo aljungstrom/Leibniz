@@ -5,6 +5,10 @@ module README where
 -- 20 October 2026, commit c37782b and type checks with Agda 2.8.0
 -- as well as 2.9.0-rc3.
 
+-- For the file that acts an interface between the paper and the
+-- formalisation, see:
+import Paper
+
 -- The formalisation is structured as follows:
 
 -- Basic lemmas/construction not available from the Cubical library
